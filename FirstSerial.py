@@ -27,7 +27,7 @@ try:
                 continue
 
             Tmp = struct.unpack('<f', tmp_bytes)[0]
-            print(f"Tmp: {Tmp:.2f}")
+            print(f"Tmp: {Tmp:.3f}")
             #==================================================
             #cou===============================================
             if len(cou_bytes) < 4:
@@ -35,14 +35,14 @@ try:
                 continue
 
             cou = struct.unpack('<f', cou_bytes)[0]
-            print(f"cou: {cou:.2f}")
+            print(f"cou: {cou:.3f}")
             #ppm==============================================
             if len(ppm_bytes) < 4:
                 print("Incomplete read, skipping...")
                 continue
 
             ppm = struct.unpack('<f', ppm_bytes)[0]
-            print(f"ppm: {ppm:.2f}")
+            print(f"ppm: {ppm:.3f}")
             #=================================================
             #hum==============================================
             if len(hum_bytes) < 4:
@@ -50,7 +50,7 @@ try:
                 continue
 
             hum = struct.unpack('<f', hum_bytes)[0]
-            print(f"hum: {hum:.2f}")
+            print(f"hum: {hum:.3f}")
            #==================================================
             print("---------------------")
            #==================================================
