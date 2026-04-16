@@ -179,9 +179,10 @@ class CircularGauge(ctk.CTkFrame):
         if pct > 0:
             self._draw_arc(cx, cy, r_outer, r_inner, 180, 180 + pct * 180, self.color)
 
+        # ── TWEAK: Value displayed with one decimal place (0.0f format) ────────
         self.canvas.create_text(
             cx, cy - 4,
-            text=str(int(value)),
+            text=f"{value:.1f}",
             fill=self.color,
             font=(_F_MONO, 16, "bold"),
         )
