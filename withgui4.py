@@ -17,7 +17,7 @@ _PALETTE = {
 
 _SENSORS = {
     "production": {
-        "temperature": {"label": "Temperature", "unit": "°C", "max": 100, "color": "#ef4444"},
+        "temperature": {"label": "Temp", "unit": "°C", "max": 100, "color": "#ef4444"},
         "courant": {"label": "Current", "unit": "A", "max": 100, "color": "#38bdf8"}
     },
     "storage": {
@@ -108,13 +108,22 @@ class HydrogenApp(ctk.CTk):
         self.ui_charts = {}
         self.ui_lines = {}
 
+        # We change this line to create a TUPLE instead of a LIST
+        # The tuple() function converts our list [0, 1, 2...] into a fixed (0, 1, 2...)
+        x_values = tuple(str(i) for i in range(20))
+
         for i, (key, conf) in enumerate(_SENSORS['production'].items()):
-            chart = ctkchart.CTkLineChart(chart_card, height=200, axis_color=_PALETTE["border"], fg_color="#0d1424")
+            chart = ctkchart.CTkLineChart(
+                chart_card,
+                height=200,
+                axis_color=_PALETTE["border"],
+                fg_color="#0d1424",
+                x_axis_values=x_values
+            )
             chart.pack(fill="x", padx=10, pady=5)
             line = ctkchart.CTkLine(chart, color=conf['color'], size=2)
             self.ui_charts[key] = chart
             self.ui_lines[key] = line
-
     def update_loop(self):
         packet = self.serial.read_data()
         alpha = 0.2
@@ -138,12 +147,13 @@ if __name__ == "__main__":
 # =================================================================
 # SETTINGS & TUNING (Quick Reference)
 # =================================================================
-# To change dashboard colors (HMI Look) -> Go to Line 14 [_PALETTE]
-# To change sensor limits or units -> Go to Line 19 [_SENSORS]
-# To change the COM Port -> Go to Line 32 [SerialManager]
-# To modify the data packet format (float count) -> Go to Line 38 [struct.unpack]
-# To change the gauge background color -> Go to Line 53 [bg="#162032"]
-# To change the startup window size -> Go to Line 71 [self.geometry]
-# To adjust data smoothing (Filter Intensity) -> Go to Line 106 [alpha]
-# To change the refresh rate (Sampling speed) -> Go to Line 118 [self.after(100)]
+# to change dashboard colors (HMI Look) go to line 15
+# to change sensor limits or units go to line 20
+# to change the COM Port go to line 33
+# to modify the data packet format (float count) go to line 41
+# to change the gauge background color go to line 56
+# to change the startup window size go to line 74
+# to adjust data smoothing (Filter Intensity) go to line 111
+# to change the refresh rate (Sampling speed) go to line 132
 # =================================================================
+#4 is better now
